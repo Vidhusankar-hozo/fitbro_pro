@@ -66,7 +66,8 @@ st.markdown("<div class='subtitle'>Your AI-powered fitness, food & mental wellne
 # --- Hero Image ---
 st.divider()
 st.subheader("🔥 Let’s Crush Your Goals")
-st.image("https://cdn.pixabay.com/photo/2021/09/13/17/32/fitness-6621516_1280.jpg", use_container_width=True)
+st.image("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSpGzehCnQ2s2v_cORVK-X4ck9KBwfilixKg&s", use_container_width=True)
+
 
 # --- Navigation Buttons ---
 st.divider()
