@@ -73,7 +73,7 @@ for idx, col in enumerate(cols):
         except:
             st.warning(f"⚠️ Image #{idx+1} couldn't load.")
 
-# --- Navigation Cards ---
+# --- Navigation Buttons ---
 st.divider()
 st.subheader("🚀 Quick Access")
 
@@ -82,28 +82,32 @@ col1, col2, col3 = st.columns(3)
 with col1:
     with st.container():
         st.markdown("<div class='card'>🏋️‍♂️</div>", unsafe_allow_html=True)
-        st.page_link("pages/1_🏋️_Workouts.py", label="Log Workout", icon="🏋️‍♂️")
+        if st.button("Log Workout", key="btn1"):
+            st.switch_page("pages/1_🏋️_Workouts.py")
 
     with st.container():
         st.markdown("<div class='card'>🍱</div>", unsafe_allow_html=True)
-        st.page_link("pages/2_🍱_Meals.py", label="Meals & Calories", icon="🍱")
+        if st.button("Meals & Calories", key="btn2"):
+            st.switch_page("pages/2_🍱_Meals.py")
 
 with col2:
     with st.container():
         st.markdown("<div class='card'>📉</div>", unsafe_allow_html=True)
-        st.page_link("pages/3_📉_Weight.py", label="Track Weight", icon="📉")
+        if st.button("Track Weight", key="btn3"):
+            st.switch_page("pages/3_📉_Weight.py")
 
     with st.container():
         st.markdown("<div class='card'>😴</div>", unsafe_allow_html=True)
-        st.page_link("pages/4_😴_Sleep_Mood.py", label="Sleep & Mood", icon="😴")
+        if st.button("Sleep & Mood", key="btn4"):
+            st.switch_page("pages/4_😴_Sleep_Mood.py")
 
 with col3:
     with st.container():
         st.markdown("<div class='card'>🤖</div>", unsafe_allow_html=True)
-        st.page_link("pages/5_🤖_ChatBot.py", label="Ask FitBro", icon="🤖")
+        if st.button("Ask FitBro", key="btn5"):
+            st.switch_page("pages/5_🤖_ChatBot.py")
 
 # --- Footer Quote ---
 st.divider()
 st.markdown("<div class='quote'>“Discipline is choosing between what you want now and what you want most.”</div>", unsafe_allow_html=True)
 st.caption("🔧 Built by Vidhusankar with ❤️ | Powered by Streamlit")
-
