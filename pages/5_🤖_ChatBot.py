@@ -55,7 +55,7 @@ def get_bored_suggestion():
 def get_smart_reply(user_input):
     user_input = user_input.lower()
 
-   if any(word in user_input for word in ["workout", "exercise", "train", "gym"]):
+    if any(word in user_input for word in ["workout", "exercise", "train", "gym"]):
         # 🧠 Map friendly terms to actual API muscle names
         muscle_map = {
             "arms": "biceps",
@@ -74,7 +74,6 @@ def get_smart_reply(user_input):
                 body = muscle_map[word]
                 break
         return get_exercise(body)
-
 
     elif any(word in user_input for word in ["calorie", "nutrition", "eat", "food"]):
         for item in ["oats", "milk", "banana", "egg", "chicken", "rice"]:
@@ -97,6 +96,7 @@ def get_smart_reply(user_input):
             "Your health is your power, bro. Let’s build it together 💪",
             "Need a meal tip, workout plan, or just a mental reset?"
         ])
+
 
 # Chat form
 with st.form("chat_form", clear_on_submit=True):
