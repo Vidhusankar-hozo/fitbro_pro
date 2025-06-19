@@ -62,10 +62,11 @@ st.markdown("""
 st.markdown("<h1 class='main-title'>💪 FitBro Pro</h1>", unsafe_allow_html=True)
 st.markdown("<div class='subtitle'>Your AI-powered fitness, food & mental wellness tracker</div>", unsafe_allow_html=True)
 
+
 # --- Hero Image ---
 st.divider()
 st.subheader("🔥 Let’s Crush Your Goals")
-st.image("https://cdn.pixabay.com/photo/2021/09/13/17/32/fitness-6621516_1280.jpg", use_column_width=True)
+st.image("https://cdn.pixabay.com/photo/2021/09/13/17/32/fitness-6621516_1280.jpg", use_container_width=True)
 
 # --- Navigation Buttons ---
 st.divider()
