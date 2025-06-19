@@ -62,16 +62,14 @@ st.markdown("""
 st.markdown("<h1 class='main-title'>💪 FitBro Pro</h1>", unsafe_allow_html=True)
 st.markdown("<div class='subtitle'>Your AI-powered fitness, food & mental wellness tracker</div>", unsafe_allow_html=True)
 
-
-# --- Hero Image ---
 # --- Hero Image ---
 st.divider()
 st.subheader("🔥 Let’s Crush Your Goals")
 
 st.markdown("""
     <div style='text-align: center;'>
-        <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsuGuANb6fyjJ0dgG-JoPb4i5uZTk5hV1irQ&s' 
-             style='max-width: 800px; width: 100%; border-radius: 16px; box-shadow: 0 4px 18px rgba(0,0,0,0.2);' />
+        <img src='https://png.pngtree.com/background/20250107/original/pngtree-muscular-person-powerlifting-a-stellar-crypto-heavy-barbell-in-stunning-3d-picture-image_13370479.jpg' 
+             style='max-width: 800px; width: 100%; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); margin-bottom: 20px;' />
     </div>
 """, unsafe_allow_html=True)
 
