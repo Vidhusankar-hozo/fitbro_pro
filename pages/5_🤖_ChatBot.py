@@ -35,15 +35,19 @@ def get_exercise(bodypart="chest"):
 
 def get_food_info(food="oats"):
     try:
-        res = requests.get(f"https://world.openfoodfacts.org/api/v0/product/{food}.json")
+        res = requests.get(f"https://world.openfoodfacts.org/cgi/search.pl?search_terms={food}&search_simple=1&action=process&json=1")
         data = res.json()
-        if 'product' in data:
-            name = data['product'].get("product_name", food)
-            kcal = data['product'].get("nutriments", {}).get("energy-kcal_100g", "N/A")
-            return f"{name.title()} → {kcal} kcal per 100g"
-        return "Nutrition info not found. Try a more common item!"
-    except:
+        if data["count"] == 0:
+            return "🍽️ Nutrition info not found. Try a common item like milk, oats, egg, or rice."
+
+        product = data["products"][0]
+        name = product.get("product_name", food)
+        kcal = product.get("nutriments", {}).get("energy-kcal_100g", "N/A")
+        proteins = product.get("nutriments", {}).get("proteins_100g", "N/A")
+        return f"🍽️ **{name.title()}** → {kcal} kcal / 100g, {proteins}g protein"
+    except Exception as e:
         return "⚠️ Could not fetch nutrition info right now."
+
 
 def get_bored_suggestion():
     try:
