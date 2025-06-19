@@ -1,3 +1,4 @@
+# 1. Import + page config
 import streamlit as st
 
 st.set_page_config(
@@ -6,54 +7,32 @@ st.set_page_config(
     layout="wide"
 )
 
-# --- Custom CSS ---
-st.markdown("""
-    <style>
-        .main-title {
-            text-align: center;
-            font-size: 3rem;
-            font-weight: 800;
-            background: -webkit-linear-gradient(45deg, #e63946, #f1faee);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .subtitle {
-            text-align: center;
-            color: #6c757d;
-            font-size: 1.2rem;
-            margin-top: -10px;
-        }
-        .card {
-            padding: 1.5rem;
-            border-radius: 20px;
-            background-color: #ffffff10;
-            border: 1px solid #ccc;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-        .quote {
-            font-style: italic;
-            color: #495057;
-            text-align: center;
-            font-size: 1.1rem;
-        }
-    </style>
-""", unsafe_allow_html=True)
-
-# --- Title + Subtitle ---
+# 2. Main Title + Subtitle
 st.markdown("<h1 class='main-title'>💪 FitBro Pro</h1>", unsafe_allow_html=True)
 st.markdown("<div class='subtitle'>Track workouts, log meals, monitor weight, and talk with your AI bro</div>", unsafe_allow_html=True)
 
+# ✅ 🔥 3. ADD GIF GALLERY HERE:
 st.divider()
+st.subheader("🔥 Stay Motivated")
 
-# --- Hero Image ---
-st.image("https://img.freepik.com/free-photo/fitness-app-concept_23-2149203544.jpg", use_container_width=True)
+gif_urls = [
+    "https://cdn.dribbble.com/users/214068/screenshots/3861570/fitness-loader.gif",
+    "https://i.pinimg.com/originals/43/84/d5/4384d5a6a1ae20e508ff8c1a489ad202.gif",
+    "https://darebee.com/images/stories/banners/banner-fitness-the-moment.jpg",
+    "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/16f6f980484165.5c644d9e0b1e6.gif"
+]
 
+cols = st.columns(4)
+for idx, col in enumerate(cols):
+    with col:
+        st.image(gif_urls[idx], use_container_width=True)
 
-
+# 4. Navigation links
 st.divider()
 st.subheader("🚀 Quick Access")
+
+# Continue your existing columns and links here...
+
 
 # --- App Navigation Cards ---
 col1, col2, col3 = st.columns(3)
