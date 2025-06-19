@@ -1,36 +1,99 @@
 import streamlit as st
 import random
+import requests
 
-st.markdown("## 🤖 Mental Fitness ChatBot")
+st.markdown("## 🤖 FitBro ChatBot – Your Smart Fitness + Wellness Coach")
 
 if "chat_history" not in st.session_state:
     st.session_state.chat_history = []
 
-# Simulated intelligent responses
-def get_reply(user_input):
-    responses = [
-        "I'm here for you. Remember to take deep breaths. 🌿",
-        "You're stronger than you think. Keep going 💪",
-        "I'm listening... what's on your mind?",
-        "Self-care isn't selfish. Prioritize yourself today ❤️",
-        "Let's take one step at a time. You've got this!"
-    ]
-    if "sad" in user_input.lower():
-        return "I'm sorry you're feeling down. Want to try a breathing exercise together?"
-    elif "happy" in user_input.lower():
-        return "That's awesome! Celebrate even the small wins 🎉"
-    else:
-        return random.choice(responses)
+# Optional API Key (Free if you register at https://api-ninjas.com)
+API_NINJAS_KEY = "VD2rCWR7wKnJYicECdB7IQ==PD6itUqwLev8y4z4"  # can leave blank for now
 
+def get_quote():
+    try:
+        res = requests.get("https://zenquotes.io/api/random")
+        data = res.json()
+        return f"{data[0]['q']} — *{data[0]['a']}*"
+    except:
+        return "Keep going, you’re doing better than you think. 🚀"
+
+def get_exercise(bodypart="chest"):
+    if not API_NINJAS_KEY:
+        return "⚠️ Workout suggestions need an API key from api-ninjas.com (free)."
+    try:
+        res = requests.get(
+            f"https://api.api-ninjas.com/v1/exercises?muscle={bodypart}",
+            headers={"X-Api-Key": API_NINJAS_KEY}
+        )
+        data = res.json()
+        if not data:
+            return "😕 Couldn't find workouts for that muscle group."
+        return "\\n".join([f"🏋️ {ex['name'].title()}: {ex['instructions'][:100]}..." for ex in data[:2]])
+    except:
+        return "⚠️ Error fetching exercise data."
+
+def get_food_info(food="oats"):
+    try:
+        res = requests.get(f"https://world.openfoodfacts.org/api/v0/product/{food}.json")
+        data = res.json()
+        if 'product' in data:
+            name = data['product'].get("product_name", food)
+            kcal = data['product'].get("nutriments", {}).get("energy-kcal_100g", "N/A")
+            return f"{name.title()} → {kcal} kcal per 100g"
+        return "Nutrition info not found. Try a more common item!"
+    except:
+        return "⚠️ Could not fetch nutrition info right now."
+
+def get_bored_suggestion():
+    try:
+        res = requests.get("https://www.boredapi.com/api/activity")
+        return "🧘 " + res.json()["activity"]
+    except:
+        return "Take a walk, stretch, or listen to calming music 🎧"
+
+def get_smart_reply(user_input):
+    user_input = user_input.lower()
+
+    if any(word in user_input for word in ["workout", "exercise", "train", "gym"]):
+        body = "chest"
+        for part in ["arms", "legs", "abs", "back", "shoulders"]:
+            if part in user_input:
+                body = part
+        return get_exercise(body)
+
+    elif any(word in user_input for word in ["calorie", "nutrition", "eat", "food"]):
+        for item in ["oats", "milk", "banana", "egg", "chicken", "rice"]:
+            if item in user_input:
+                return get_food_info(item)
+        return get_food_info("oats")
+
+    elif any(word in user_input for word in ["motivate", "motivation", "quote", "inspire"]):
+        return get_quote()
+
+    elif any(word in user_input for word in ["bored", "stress", "tired", "low", "sad"]):
+        return get_bored_suggestion()
+
+    elif "sleep" in user_input:
+        return "😴 Tip: Avoid screens 30 min before bed and stick to a sleep routine."
+
+    else:
+        return random.choice([
+            "How are you feeling today? Want to talk food, mood, or movement?",
+            "Your health is your power, bro. Let’s build it together 💪",
+            "Need a meal tip, workout plan, or just a mental reset?"
+        ])
+
+# Chat form
 with st.form("chat_form", clear_on_submit=True):
-    user_input = st.text_input("Type your thoughts here:")
+    user_input = st.text_input("👨‍💻 You:")
     submitted = st.form_submit_button("Send")
     if submitted and user_input:
-        reply = get_reply(user_input)
+        reply = get_smart_reply(user_input)
         st.session_state.chat_history.append(("You", user_input))
         st.session_state.chat_history.append(("FitBro Bot", reply))
 
-# Display chat history
+# Display chat
 for sender, message in st.session_state.chat_history:
     with st.chat_message(sender if sender == "You" else "assistant"):
         st.markdown(message)
