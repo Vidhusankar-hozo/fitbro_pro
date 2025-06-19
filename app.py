@@ -1,17 +1,60 @@
-# 1. Import + page config
 import streamlit as st
 
+# Page config
 st.set_page_config(
     page_title="FitBro Pro 💪",
     page_icon="💪",
     layout="wide"
 )
 
-# 2. Main Title + Subtitle
-st.markdown("<h1 class='main-title'>💪 FitBro Pro</h1>", unsafe_allow_html=True)
-st.markdown("<div class='subtitle'>Track workouts, log meals, monitor weight, and talk with your AI bro</div>", unsafe_allow_html=True)
+# --- Custom CSS ---
+st.markdown("""
+    <style>
+        .main-title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 900;
+            background: -webkit-linear-gradient(45deg, #ff3c3c, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding: 1rem;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 1.3rem;
+            margin-top: -10px;
+            margin-bottom: 30px;
+        }
+        .card {
+            padding: 1.5rem;
+            border-radius: 20px;
+            background-color: #fefefe;
+            border: 1px solid #ddd;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            transition: all 0.2s ease-in-out;
+        }
+        .card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+        }
+        .quote {
+            font-style: italic;
+            color: #444;
+            text-align: center;
+            font-size: 1.2rem;
+            margin-top: 2rem;
+        }
+    </style>
+""", unsafe_allow_html=True)
 
-# ✅ 🔥 3. ADD GIF GALLERY HERE:
+# --- Title + Subtitle ---
+st.markdown("<h1 class='main-title'>💪 FitBro Pro</h1>", unsafe_allow_html=True)
+st.markdown("<div class='subtitle'>Your AI-powered fitness, food & mental wellness tracker</div>", unsafe_allow_html=True)
+
+# --- GIF Gallery ---
 st.divider()
 st.subheader("🔥 Stay Motivated")
 
@@ -25,39 +68,42 @@ gif_urls = [
 cols = st.columns(4)
 for idx, col in enumerate(cols):
     with col:
-        st.image(gif_urls[idx], use_container_width=True)
+        try:
+            st.image(gif_urls[idx], use_container_width=True)
+        except:
+            st.warning(f"⚠️ Image #{idx+1} couldn't load.")
 
-# 4. Navigation links
+# --- Navigation Cards ---
 st.divider()
 st.subheader("🚀 Quick Access")
 
-# Continue your existing columns and links here...
-
-
-# --- App Navigation Cards ---
 col1, col2, col3 = st.columns(3)
 
 with col1:
-    st.markdown("<div class='card'>🏋️‍♂️</div>", unsafe_allow_html=True)
-    st.page_link("pages/1_🏋️_Workouts.py", label="Log Workout", icon="🏋️‍♂️")
-    
-    st.markdown("<div class='card'>🍱</div>", unsafe_allow_html=True)
-    st.page_link("pages/2_🍱_Meals.py", label="Meals & Calories", icon="🍱")
+    with st.container():
+        st.markdown("<div class='card'>🏋️‍♂️</div>", unsafe_allow_html=True)
+        st.page_link("pages/1_🏋️_Workouts.py", label="Log Workout", icon="🏋️‍♂️")
+
+    with st.container():
+        st.markdown("<div class='card'>🍱</div>", unsafe_allow_html=True)
+        st.page_link("pages/2_🍱_Meals.py", label="Meals & Calories", icon="🍱")
 
 with col2:
-    st.markdown("<div class='card'>📉</div>", unsafe_allow_html=True)
-    st.page_link("pages/3_📉_Weight.py", label="Track Weight", icon="📉")
+    with st.container():
+        st.markdown("<div class='card'>📉</div>", unsafe_allow_html=True)
+        st.page_link("pages/3_📉_Weight.py", label="Track Weight", icon="📉")
 
-    st.markdown("<div class='card'>😴</div>", unsafe_allow_html=True)
-    st.page_link("pages/4_😴_Sleep_Mood.py", label="Sleep & Mood", icon="😴")
+    with st.container():
+        st.markdown("<div class='card'>😴</div>", unsafe_allow_html=True)
+        st.page_link("pages/4_😴_Sleep_Mood.py", label="Sleep & Mood", icon="😴")
 
 with col3:
-    st.markdown("<div class='card'>🤖</div>", unsafe_allow_html=True)
-    st.page_link("pages/5_🤖_ChatBot.py", label="Ask FitBro", icon="🤖")
+    with st.container():
+        st.markdown("<div class='card'>🤖</div>", unsafe_allow_html=True)
+        st.page_link("pages/5_🤖_ChatBot.py", label="Ask FitBro", icon="🤖")
 
+# --- Footer Quote ---
 st.divider()
-
-# --- Motivational Quote ---
 st.markdown("<div class='quote'>“Discipline is choosing between what you want now and what you want most.”</div>", unsafe_allow_html=True)
-
 st.caption("🔧 Built by Vidhusankar with ❤️ | Powered by Streamlit")
+
