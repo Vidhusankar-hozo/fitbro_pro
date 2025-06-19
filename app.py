@@ -48,7 +48,8 @@ st.markdown("<div class='subtitle'>Track workouts, log meals, monitor weight, an
 st.divider()
 
 # --- Hero Image ---
-st.image("https://media.giphy.com/media/3o7aD6vT5RU4XtB4qE/giphy.gif", use_container_width=True)
+st.image("https://img.freepik.com/free-photo/fitness-app-concept_23-2149203544.jpg", use_container_width=True)
+
 
 
 st.divider()
