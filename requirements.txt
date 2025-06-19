@@ -2,6 +2,3 @@ streamlit
 streamlit-option-menu
 pandas
 matplotlib
-pyttsx3
-SpeechRecognition
-pyaudio
