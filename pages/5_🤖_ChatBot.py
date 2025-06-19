@@ -59,8 +59,8 @@ def get_bored_suggestion():
 def get_smart_reply(user_input):
     user_input = user_input.lower()
 
+    # 💪 Workout-related
     if any(word in user_input for word in ["workout", "exercise", "train", "gym"]):
-        # 🧠 Map friendly terms to actual API muscle names
         muscle_map = {
             "arms": "biceps",
             "abs": "abdominals",
@@ -72,37 +72,40 @@ def get_smart_reply(user_input):
             "triceps": "triceps",
             "biceps": "biceps"
         }
-        body = "chest"  # default muscle
+        body = "chest"  # default
         for word in muscle_map:
             if word in user_input:
                 body = muscle_map[word]
                 break
         return get_exercise(body)
 
-      elif any(word in user_input for word in ["calorie", "nutrition", "eat", "food", "kcal", "protein"]):
-        # Try matching known food names
+    # 🍽️ Food/nutrition
+    elif any(word in user_input for word in ["calorie", "nutrition", "eat", "food", "kcal", "protein"]):
         for item in ["apple", "banana", "egg", "milk", "rice", "chicken", "oats", "biryani", "peanut butter"]:
             if item in user_input:
                 return get_food_info(item)
-        # If no match, try using full input as food search
-        return get_food_info(user_input)
+        return get_food_info(user_input)  # Try full input if no keyword matched
 
-
+    # 🌟 Motivation
     elif any(word in user_input for word in ["motivate", "motivation", "quote", "inspire"]):
         return get_quote()
 
+    # 😓 Mood
     elif any(word in user_input for word in ["bored", "stress", "tired", "low", "sad"]):
         return get_bored_suggestion()
 
+    # 💤 Sleep
     elif "sleep" in user_input:
         return "😴 Tip: Avoid screens 30 min before bed and stick to a sleep routine."
 
+    # Default response
     else:
         return random.choice([
             "How are you feeling today? Want to talk food, mood, or movement?",
             "Your health is your power, bro. Let’s build it together 💪",
             "Need a meal tip, workout plan, or just a mental reset?"
         ])
+
 
 
 # Chat form
