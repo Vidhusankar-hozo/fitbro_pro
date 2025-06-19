@@ -79,13 +79,13 @@ def get_smart_reply(user_input):
                 break
         return get_exercise(body)
 
-  elif any(word in user_input for word in ["calorie", "nutrition", "eat", "food", "kcal", "protein"]):
-    # Try to extract known foods from user input
-    for item in ["apple", "banana", "egg", "milk", "rice", "chicken", "oats", "biryani", "peanut butter"]:
-        if item in user_input:
-            return get_food_info(item)
-    # If no known food matched, use whole user_input as the food name
-    return get_food_info(user_input)
+      elif any(word in user_input for word in ["calorie", "nutrition", "eat", "food", "kcal", "protein"]):
+        # Try matching known food names
+        for item in ["apple", "banana", "egg", "milk", "rice", "chicken", "oats", "biryani", "peanut butter"]:
+            if item in user_input:
+                return get_food_info(item)
+        # If no match, try using full input as food search
+        return get_food_info(user_input)
 
 
     elif any(word in user_input for word in ["motivate", "motivation", "quote", "inspire"]):
