@@ -55,7 +55,7 @@ def get_bored_suggestion():
 def get_smart_reply(user_input):
     user_input = user_input.lower()
 
-      if any(word in user_input for word in ["workout", "exercise", "train", "gym"]):
+   if any(word in user_input for word in ["workout", "exercise", "train", "gym"]):
         # 🧠 Map friendly terms to actual API muscle names
         muscle_map = {
             "arms": "biceps",
@@ -66,11 +66,9 @@ def get_smart_reply(user_input):
             "legs": "legs",
             "shoulders": "shoulders",
             "triceps": "triceps",
-            "biceps": "biceps",
+            "biceps": "biceps"
         }
-        # Default muscle
-        body = "chest"
-        # Check if any keyword matches user input
+        body = "chest"  # default muscle
         for word in muscle_map:
             if word in user_input:
                 body = muscle_map[word]
